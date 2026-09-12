@@ -1,27 +1,11 @@
-# Paste Perfect test environment
+# Paste Perfect preview
 
-The preview of [Paste Perfect](https://github.com/paste-perfect/paste-perfect) is published at <https://paste-perfect.github.io/paste-perfect-test/>.
+[Open the test site](https://paste-perfect.github.io/paste-perfect-test/).
 
-`main` contains the environment checks and operating instructions. `gh-pages` contains generated files only. GitHub Pages serves the root of `gh-pages`; do not edit generated bundles or store workflows on that branch.
+This repository is a deployment destination only. `gh-pages` contains the built application; `main` contains this documentation. There are no application dependencies, build scripts or maintenance workflows here.
 
-Every successful source-repository CI run on `dev` produces a preview artifact. The source delivery workflow verifies its commit metadata and publishes that exact artifact here using `DEPLOY_KEY_PREVIEW`. A maintenance change does not need a semantic release to reach test.
+The [source repository](https://github.com/paste-perfect/paste-perfect) builds and tests `dev`, then deploys the exact successful CI artifact using its existing preview deploy key. It verifies the published commit and runs browser checks after deployment and hourly. All dependency updates, releases and automation belong in the source repository.
 
-The scheduled verification checks the deployed commit, base path and referenced assets, then runs browser smoke tests from that exact source revision. It also runs after a Pages build and can be started manually. Failed deployment checks remain visible in Actions; they never modify or promote source code.
+Keep GitHub Pages set to **Deploy from a branch → gh-pages → / (root)**. Do not edit generated files. The header and `deployment.json` identify the deployed source commit.
 
-## Setup
-
-- Default branch: `main`.
-- Keep Pages configured to deploy from `gh-pages` at `/`.
-- Keep the existing preview deploy key restricted to this repository.
-- Require `Environment configuration` on PRs into `main`; forbid deletion and force pushes to `main`.
-- The workflows use the built-in token with read access. No additional secrets are needed.
-
-Renovate maintains Node and pinned Actions through PRs; GitHub auto-merge waits for the required configuration check on an up-to-date branch.
-
-## Verification and recovery
-
-Run `node --test scripts/*.test.mjs` with Node 24 to check the validation logic locally. Run `node scripts/verify-deployment.mjs` to check the published site.
-
-`deployment.json` records the source SHA and target. Follow that SHA in the source repository to inspect CI and the change that was deployed. The application header displays its short SHA so preview and production are identifiable without release-generated commits.
-
-If deployment fails, rerun the source delivery job for the latest successful `dev` CI run. Superseded commits are intentionally ignored. To roll back, revert the source change through a PR into `dev`; the normal validation and deployment path publishes the revert.
+To retry or roll back, use the source repository's [maintenance instructions](https://github.com/paste-perfect/paste-perfect/blob/dev/docs/maintenance.md).
