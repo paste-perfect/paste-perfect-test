@@ -10,11 +10,13 @@ The scheduled verification checks the deployed commit, base path and referenced 
 
 ## Setup
 
-- Set this repository's default branch to `main` after merging the configuration PR.
+- Default branch: `main`.
 - Keep Pages configured to deploy from `gh-pages` at `/`.
 - Keep the existing preview deploy key restricted to this repository.
 - Require `Environment configuration` on PRs into `main`; forbid deletion and force pushes to `main`.
 - The workflows use the built-in token with read access. No additional secrets are needed.
+
+Renovate maintains Node and pinned Actions through PRs; GitHub auto-merge waits for the required configuration check on an up-to-date branch.
 
 ## Verification and recovery
 
