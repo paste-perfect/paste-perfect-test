@@ -1,7 +1,7 @@
 {
   "repository": "paste-perfect/paste-perfect",
-  "sha": "1bc2a84386b1ca615c2486c3673829e04c9ccb26",
+  "sha": "8e3e543e69286257d35958b76fe6e19e23feb9b4",
   "target": "preview",
   "base": "/paste-perfect-test/",
-  "version": "v2.10.6-rc.1"
+  "version": "v2.10.6-rc.2"
 }
